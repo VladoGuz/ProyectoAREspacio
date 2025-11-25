@@ -162,57 +162,94 @@
   }
 ];
 
-      // --- COMPONENTE DE AUDIO ---
+// Variable global para controlar reproducción exclusiva
+      let audioActual = null;
+
+      // --- 1. COMPONENTE DE AUDIO ---
       AFRAME.registerComponent('sound-handler', {
         init: function () {
           this.el.addEventListener('markerFound', () => {
-            console.log("Marcador detectado");
-            const s = this.el.querySelector('[sound]');
-            if(s) s.components.sound.playSound();
+            const soundEntity = this.el.querySelector('[sound]');
+            
+            if (soundEntity) {
+                console.log("Planeta detectado. Intentando reproducir...");
+
+                // Si ya está sonando este mismo, no hacer nada
+                if (soundEntity.components.sound.isPlaying) return;
+
+                // Si hay otro sonando, cállalo
+                if (audioActual && audioActual !== soundEntity) {
+                    audioActual.components.sound.stopSound();
+                    console.log("Silenciando anterior...");
+                }
+
+                // REPRODUCIR
+                // Importante: .catch() captura si el navegador lo bloquea
+                try {
+                    soundEntity.components.sound.playSound();
+                    audioActual = soundEntity;
+                    console.log("Reproduciendo AUDIO con éxito.");
+                } catch (error) {
+                    console.error("Error al reproducir audio:", error);
+                }
+            }
           });
+
+          // Opcional: Pausar si se pierde el marcador (comenta esto si prefieres que siga hablando)
           this.el.addEventListener('markerLost', () => {
-            console.log("Marcador perdido");
-            const s = this.el.querySelector('[sound]');
-            if(s) s.components.sound.stopSound();
+             // console.log("Marcador perdido - Audio sigue sonando (Narrador mode)");
           });
         }
       });
 
       // --- INICIO ---
-      function iniciarExperiencia() {
+    function iniciarExperiencia() {
         document.getElementById('overlay').style.display = 'none';
+        
         const scene = document.querySelector('a-scene');
-
-        // AGREGAMOS LUCES A LA ESCENA GENERAL (Para que nada se vea negro)
-        const luzAmbiente = document.createElement('a-entity');
-        luzAmbiente.setAttribute('light', 'type: ambient; color: #FFF; intensity: 1.5');
-        scene.appendChild(luzAmbiente);
+        if (scene.audioListener) {
+            const context = scene.audioListener.context;
+            if (context.state === 'suspended') {
+                context.resume().then(() => {
+                    console.log("AudioContext DESPERTADO forzosamente.");
+                });
+            }
+        }
 
         planetasDB.forEach(data => {
           const marker = document.createElement('a-marker');
-
-          // LÓGICA HÍBRIDA: Soporta 'hiro' o archivos .patt
+          
+          // Configuración del marcador
           if (data.pattern === 'hiro') {
-              marker.setAttribute('preset', 'hiro');
+            marker.setAttribute('preset', 'hiro');
           } else {
-              marker.setAttribute('type', 'pattern');
-              marker.setAttribute('url', data.pattern);
+            marker.setAttribute('type', 'pattern');
+            marker.setAttribute('url', data.pattern);
           }
           
-          marker.setAttribute('sound-handler', '');
+          marker.setAttribute('sound-handler', ''); // Activamos la lógica inteligente
           marker.setAttribute('emitevents', 'true');
 
-          // PLANETA
+          // Configuración del Planeta (Con la velocidad personalizada que pediste)
           const sphere = document.createElement('a-sphere');
           sphere.setAttribute('position', '0 0.5 0');
           sphere.setAttribute('radius', data.tamano);
-          sphere.setAttribute('src', data.textura);
-          sphere.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: ${data.velocidad}; easing: linear');
+          
+          // Shader especial para el Sol
+          if (data.nombre === "Sol") {
+              sphere.setAttribute('material', 'shader: flat; src: ' + data.textura);
+          } else {
+              sphere.setAttribute('src', data.textura);
+          }
+          
+          // Animación con velocidad personalizada
+          sphere.setAttribute('animation', `property: rotation; to: 0 360 0; loop: true; dur: ${data.velocidad || 10000}; easing: linear`);
 
-          // AUDIO
+          // Configuración del Audio
           if (data.audio) {
             const sound = document.createElement('a-entity');
-            sound.setAttribute('sound', `src: url(${data.audio}); autoplay: false; volume: 3`);
+            // 'volume: 4' para que se escuche fuerte en el evento
+            sound.setAttribute('sound', `src: url(${data.audio}); autoplay: false; volume: 6`);
             marker.appendChild(sound);
           }
 
@@ -220,6 +257,7 @@
           scene.appendChild(marker);
         });
       }
+    
     </script>
 
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false">
