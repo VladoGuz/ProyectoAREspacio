@@ -56,7 +56,7 @@ const planetasDB = [
     velocidad: 4000, // Muy rápido
   },
   {
-    id: 5,
+    id: 6,
     nombre: "Saturno",
     pattern: "assets/marcadores/pattern_saturno.patt",
     textura: "assets/planetas/2k_saturn.jpg", // Usando tu textura subida
@@ -82,45 +82,9 @@ const planetasDB = [
     tamano: 0.7,
     velocidad: 6000,
   },
-  // --- PLANETAS ENANOS (Tus texturas ficticias) ---
+  
   {
     id: 9,
-    nombre: "Ceres",
-    pattern: "assets/marcadores/pattern_ceres.patt",
-    textura: "assets/planetas/2k_ceres_fictional.jpg",
-    audio: "assets/audio/ceres_sonido.mp3",
-    tamano: 0.2,
-    velocidad: 12000,
-  },
-  {
-    id: 10,
-    nombre: "Eris",
-    pattern: "assets/marcadores/pattern_eris.patt",
-    textura: "assets/planetas/2k_eris_fictional.jpg",
-    audio: "assets/audio/eris_sonido.mp3",
-    tamano: 0.2,
-    velocidad: 12000,
-  },
-  {
-    id: 11,
-    nombre: "Haumea",
-    pattern: "assets/marcadores/pattern_haumea.patt",
-    textura: "assets/planetas/2k_haumea_fictional.jpg",
-    audio: "assets/audio/haumea_sonido.mp3",
-    tamano: 0.25, // Ligeramente más grande por ser ovalado
-    velocidad: 3800, // Rota rapidísimo en la vida real (4 horas)
-  },
-  {
-    id: 12,
-    nombre: "Makemake",
-    pattern: "assets/marcadores/pattern_makemake.patt",
-    textura: "assets/planetas/2k_makemake_fictional.jpg",
-    audio: "assets/audio/makemake_sonido.mp3",
-    tamano: 0.2,
-    velocidad: 12000,
-  },
-  {
-    id: 11,
     nombre: "luna",
     pattern: "assets/marcadores/pattern_luna.patt",
     textura: "assets/planetas/luna.jpg",
