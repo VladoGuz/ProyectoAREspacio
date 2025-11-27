@@ -1,4 +1,4 @@
-const planetasDB = [
+export const planetasDB = [
   {
     id: 0,
     nombre: "Sol",

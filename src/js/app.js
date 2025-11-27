@@ -2,9 +2,11 @@ import { planetasDB } from "./data.js";
 
 // BLOQUE DE CONEXIÓN HTML <-> JS
 document.addEventListener("DOMContentLoaded", () => {
+  
   // Vinculamos el botón de INICIO
   const startBtn = document.getElementById("btn-start");
   if (startBtn) {
+
     startBtn.addEventListener("click", iniciarExperiencia);
   }
 
@@ -119,7 +121,3 @@ function iniciarExperiencia() {
     scene.appendChild(marker);
   });
 }
-// js/app.js
-
-// ... todas tus funciones (generarEscena, iniciarExperiencia, etc) ...
-window.iniciarExperiencia = iniciarExperiencia;
