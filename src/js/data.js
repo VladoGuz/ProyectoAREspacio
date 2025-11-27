@@ -102,64 +102,66 @@ export const planetasDB = [
     escala: "0.5 0.5 0.5", // IMPORTANTE: Los modelos suelen venir muy grandes o chicos
     velocidad: 4500
   },
-  {
-    id: 13,
-    nombre: "eclipse_solar_3d",
-    pattern: "assets/marcadores/pattern-eclipse_solar_3d.patt", // Asegúrate de tener este marcador
-    type: "3dmodel",
-    modelo: "assets/modelos_3d/eclipse_solar_3d.glb",
-    audio: "assets/audio/eclipse_solar_3d.mp3",
-    escala: "0.5 0.5 0.5",
-    velocidad: 4500
-  },
-  {
-    id: 14,
-    nombre: "nebulosa",
-    pattern: "assets/marcadores/pattern-nebulosa.patt",
-    type: "3dmodel",
-    modelo: "assets/modelos_3d/nebulosa.glb",
-    audio: "assets/audio/nebulosa.mp3",
-    escala: "0.5 0.5 0.5", // Las nebulosas suelen ser grandes, ajusta si tapa la pantalla
-    velocidad: 2000 // Quizás un poco más lento para una nebulosa
-  },
-  {
-    id: 15,
-    nombre: "planetas_orbitando",
-    pattern: "assets/marcadores/pattern-planetas_orbitando.patt",
-    type: "3dmodel",
-    modelo: "assets/modelos_3d/planetas_orbitando.glb",
-    audio: "assets/audio/planetas_orbitando.mp3",
-    escala: "0.3 0.3 0.3", // Reduje un poco la escala por si la órbita es muy amplia
-    velocidad: 5000
-  },
-  {
-    id: 16,
-    nombre: "saturno_3d",
-    pattern: "assets/marcadores/pattern-saturno_3d.patt",
-    type: "3dmodel",
-    modelo: "assets/modelos_3d/saturno_3d.glb",
-    audio: "assets/audio/saturno_3d.mp3",
-    escala: "0.5 0.5 0.5",
-    velocidad: 4500
-  },
-  {
-    id: 17,
-    nombre: "sistema_solar3d",
-    pattern: "assets/marcadores/pattern-sistema_solar3d.patt",
-    type: "3dmodel",
-    modelo: "assets/modelos_3d/sistema_solar3d.glb",
-    audio: "assets/audio/sistema_solar3d.mp3",
-    escala: "0.1 0.1 0.1", // OJO: Los sistemas solares suelen ser gigantes, empieza con escala pequeña
-    velocidad: 4000
-  },
-  {
-    id: 18,
-    nombre: "solar_system_model_orrery",
-    pattern: "assets/marcadores/pattern-orrery.patt", // Nombre abreviado sugerido para el patrón
-    type: "3dmodel",
-    modelo: "assets/modelos_3d/solar_system_model_orrery.glb",
-    audio: "assets/audio/solar_system_model_orrery.mp3",
-    escala: "0.2 0.2 0.2", // También suele ser un modelo complejo y grande
-    velocidad: 3000
-  },
+  [
+    {
+      id: 13,
+      nombre: "eclipse_solar_3d",
+      pattern: "assets/marcadores/pattern_eclipse_solar.patt", // Corregido según tu imagen
+      type: "3dmodel",
+      modelo: "assets/modelos_3d/eclipse_solar_3d.glb",
+      audio: "assets/audio/eclipse_solar_3d.mp3",
+      escala: "0.5 0.5 0.5",
+      velocidad: 4500
+    },
+    {
+      id: 14,
+      nombre: "nebulosa",
+      pattern: "assets/marcadores/pattern_nebulosa.patt", // Corregido (guion bajo)
+      type: "3dmodel",
+      modelo: "assets/modelos_3d/nebulosa.glb",
+      audio: "assets/audio/nebulosa.mp3",
+      escala: "0.5 0.5 0.5",
+      velocidad: 2000
+    },
+    {
+      id: 15,
+      nombre: "planetas_orbitando",
+      pattern: "assets/marcadores/pattern_planeta_orbitando.patt", // OJO: Tu archivo dice "planeta" (singular), el modelo dice "planetas"
+      type: "3dmodel",
+      modelo: "assets/modelos_3d/planetas_orbitando.glb",
+      audio: "assets/audio/planetas_orbitando.mp3",
+      escala: "0.3 0.3 0.3",
+      velocidad: 5000
+    },
+    {
+      id: 16,
+      nombre: "saturno_3d",
+      pattern: "assets/marcadores/pattern_saturno3d.patt", // Corregido (sin guion bajo antes del 3d)
+      type: "3dmodel",
+      modelo: "assets/modelos_3d/saturno_3d.glb",
+      audio: "assets/audio/saturno_3d.mp3",
+      escala: "0.5 0.5 0.5",
+      velocidad: 4500
+    },
+    {
+      id: 17,
+      nombre: "sistema_solar3d",
+      pattern: "assets/marcadores/pattern_sistema_solar.patt", // Asigné el normal a este modelo
+      type: "3dmodel",
+      modelo: "assets/modelos_3d/sistema_solar3d.glb",
+      audio: "assets/audio/sistema_solar3d.mp3",
+      escala: "0.1 0.1 0.1",
+      velocidad: 4000
+    },
+    {
+      id: 18,
+      nombre: "solar_system_model_orrery",
+      pattern: "assets/marcadores/pattern_sistema_solar2.patt", // Asigné el "2" al modelo Orrery
+      type: "3dmodel",
+      modelo: "assets/modelos_3d/solar_system_model_orrery.glb",
+      audio: "assets/audio/solar_system_model_orrery.mp3",
+      escala: "0.2 0.2 0.2",
+      velocidad: 3000
+    },
+  ]
 ];
