@@ -95,7 +95,7 @@ const planetasDB = [
   {
     id: 12, // Corregí el ID (tenías dos 5)
     nombre: "blackhole_3d",
-    pattern: "assets/marcadores/blackhole_3d.patt",
+    pattern: "assets/marcadores/pattern_black_hole.patt",
     type: "3dmodel", // Etiqueta para saber que es un GLB
     modelo: "assets/modelos_3d/blackhole_3d.glb", // <--- TU ARCHIVO GLB AQUÍ
     audio: "assets/audio/saturno_sonido.mp3",
