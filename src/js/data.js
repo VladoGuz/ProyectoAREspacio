@@ -128,4 +128,14 @@ const planetasDB = [
     tamano: 0.25, // Ligeramente más grande por ser ovalado
     velocidad: 3800, // Rota rapidísimo en la vida real (4 horas)
   },
+  {
+    id: 12, // Corregí el ID (tenías dos 5)
+    nombre: "blackhole_3d",
+    pattern: "assets/marcadores/blackhole_3d.patt",
+    type: "3dmodel", // Etiqueta para saber que es un GLB
+    modelo: "assets/modelos_3d/blackhole_3d.glb", // <--- TU ARCHIVO GLB AQUÍ
+    audio: "assets/audio/saturno_sonido.mp3",
+    escala: "0.5 0.5 0.5", // IMPORTANTE: Los modelos suelen venir muy grandes o chicos
+    velocidad: 4500
+  },
 ];

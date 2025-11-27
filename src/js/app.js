@@ -55,52 +55,57 @@ function iniciarExperiencia() {
     }
   }
 
-  planetasDB.forEach((data) => {
-    const marker = document.createElement("a-marker");
-
+  planetasDB.forEach(data => {
+    const marker = document.createElement('a-marker');
+    
     // Configuración del marcador
-    if (data.pattern === "hiro") {
-      marker.setAttribute("preset", "hiro");
+    if (data.pattern === 'hiro') {
+      marker.setAttribute('preset', 'hiro');
     } else {
-      marker.setAttribute("type", "pattern");
-      marker.setAttribute("url", data.pattern);
+      marker.setAttribute('type', 'pattern');
+      marker.setAttribute('url', data.pattern);
+    }
+    
+    marker.setAttribute('sound-handler', ''); 
+    marker.setAttribute('emitevents', 'true');
+
+    // --- AQUÍ ESTÁ EL CAMBIO PARA SOPORTAR EL MODELO GLB ---
+    let entity;
+
+    if (data.type === '3dmodel') {
+        // CASO 1: Es un Modelo 3D (Saturno)
+        entity = document.createElement('a-entity');
+        entity.setAttribute('gltf-model', data.modelo);
+        // La escala es vital en modelos externos
+        entity.setAttribute('scale', data.escala || '1 1 1'); 
+        // Ajustamos posición para que flote sobre el marcador
+        entity.setAttribute('position', '0 0.5 0');
+    } else {
+        // CASO 2: Es una esfera normal (Tierra, Marte, etc.)
+        entity = document.createElement('a-sphere');
+        entity.setAttribute('radius', data.tamano);
+        entity.setAttribute('position', '0 0.5 0');
+        
+        if (data.nombre === "Sol") {
+            entity.setAttribute('material', 'shader: flat; src: ' + data.textura);
+        } else {
+            entity.setAttribute('src', data.textura);
+        }
     }
 
-    marker.setAttribute("sound-handler", ""); // Activamos la lógica inteligente
-    marker.setAttribute("emitevents", "true");
+    // Animación común para ambos (Rotación)
+    entity.setAttribute('animation', `property: rotation; to: 0 360 0; loop: true; dur: ${data.velocidad || 10000}; easing: linear`);
 
-    // Configuración del Planeta (Con la velocidad personalizada que pediste)
-    const sphere = document.createElement("a-sphere");
-    sphere.setAttribute("position", "0 0.5 0");
-    sphere.setAttribute("radius", data.tamano);
+    // Agregamos la entidad (sea esfera o modelo) al marcador
+    marker.appendChild(entity);
 
-    // Shader especial para el Sol
-    if (data.nombre === "Sol") {
-      sphere.setAttribute("material", "shader: flat; src: " + data.textura);
-    } else {
-      sphere.setAttribute("src", data.textura);
-    }
-
-    // Animación con velocidad personalizada
-    sphere.setAttribute(
-      "animation",
-      `property: rotation; to: 0 360 0; loop: true; dur: ${
-        data.velocidad || 10000
-      }; easing: linear`
-    );
-
-    // Configuración del Audio
+    // Configuración del Audio (Igual que antes)
     if (data.audio) {
-      const sound = document.createElement("a-entity");
-
-      sound.setAttribute(
-        "sound",
-        `src: url(${data.audio}); autoplay: false; volume: 6`
-      );
+      const sound = document.createElement('a-entity');
+      sound.setAttribute('sound', `src: url(${data.audio}); autoplay: false; volume: 6`);
       marker.appendChild(sound);
     }
 
-    marker.appendChild(sphere);
     scene.appendChild(marker);
   });
 }
