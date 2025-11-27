@@ -52,7 +52,7 @@ AFRAME.registerComponent("sound-handler", {
   },
 });
 
-function iniciarExperiencia() {
+
   document.getElementById("overlay").style.display = "none";
 
   const scene = document.querySelector("a-scene");
@@ -118,7 +118,8 @@ function iniciarExperiencia() {
 
     scene.appendChild(marker);
   });
-}
+
 // js/app.js
 
 // ... todas tus funciones (generarEscena, iniciarExperiencia, etc) ...
+window.iniciarExperiencia = iniciarExperiencia;
