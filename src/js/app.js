@@ -109,3 +109,31 @@ function iniciarExperiencia() {
     scene.appendChild(marker);
   });
 }
+// js/app.js
+
+// ... todas tus funciones (generarEscena, iniciarExperiencia, etc) ...
+
+// BLOQUE DE CONEXIÓN HTML <-> JS
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("Página cargada. Vinculando botones...");
+
+    // 1. Buscamos el botón por su ID
+    const botonInicio = document.getElementById('btn-start');
+
+    // 2. Verificamos que el botón exista (para evitar errores)
+    if (botonInicio) {
+        // 3. Le asignamos la función SIN PARÉNTESIS
+        // Correcto: iniciarExperiencia
+        // Incorrecto: iniciarExperiencia()
+        botonInicio.addEventListener('click', iniciarExperiencia);
+        console.log("Botón de inicio vinculado correctamente.");
+    } else {
+        console.error("Error: No encontré el botón con id 'btn-start' en el HTML");
+    }
+
+    // Vinculamos también el botón rojo de emergencia (si existe)
+    const botonUnmute = document.getElementById('btn-unmute');
+    if (botonUnmute) {
+        botonUnmute.addEventListener('click', forzarAudio);
+    }
+});
