@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Sistema Solar AR - Modular</title>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    
+    <link rel="stylesheet" href="css/style.css" />
   </head>
 
-  <body style="margin : 0px; overflow: hidden;">
-
+  <body style="margin: 0px; overflow: hidden">
     <div id="overlay">
       <h1>Explorador Espacial</h1>
       <p>Apunta al marcador para ver el planeta</p>
-      <button class="btn" onclick="iniciarExperiencia()">COMENZAR MISIÓN</button>
+      <button class="btn" onclick="iniciarExperiencia()">
+        COMENZAR MISIÓN
+      </button>
     </div>
-<script type="module" src="js/app.js"></script>
+    <script type="module" src="js/app.js"></script>
 
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false">
+    <a-scene
+      embedded
+      arjs="sourceType: webcam; debugUIEnabled: false;"
+      vr-mode-ui="enabled: false"
+    >
       <a-entity camera></a-entity>
-      
     </a-scene>
-
   </body>
 </html>
