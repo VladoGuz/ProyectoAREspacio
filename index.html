@@ -248,9 +248,10 @@
           // Configuración del Audio
           if (data.audio) {
             const sound = document.createElement('a-entity');
-            // 'volume: 4' para que se escuche fuerte en el evento
+            
             sound.setAttribute('sound', `src: url(${data.audio}); autoplay: false; volume: 6`);
             marker.appendChild(sound);
+            
           }
 
           marker.appendChild(sphere);
