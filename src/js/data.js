@@ -52,7 +52,7 @@ export const planetasDB = [
     pattern: "assets/marcadores/pattern_jupiter.patt",
     textura: "assets/planetas/2k_jupiter.jpg", // Usando tu textura subida
     audio: "assets/audio/jupiter_sonido.mp3",
-    tamano: 1.0,
+    tamano: 0.5,
     velocidad: 4000, // Muy rápido
   },
   {
@@ -100,7 +100,7 @@ export const planetasDB = [
     modelo: "assets/modelos_3d/blackhole_3d.glb", // <--- TU ARCHIVO GLB AQUÍ
     audio: "assets/audio/blackhole_3d.mp3",
     escala: "0.5 0.5 0.5", // IMPORTANTE: Los modelos suelen venir muy grandes o chicos
-    velocidad: 4500
+    velocidad: 4500,
   },
   {
       id: 13,
@@ -109,8 +109,8 @@ export const planetasDB = [
       type: "3dmodel",
       modelo: "assets/modelos_3d/eclipse_solar_3d.glb",
       audio: "assets/audio/eclipse_solar_3d.mp3",
-      escala: "0.5 0.5 0.5",
-      velocidad: 4500
+      escala: "0.6 0.6 0.6",
+      velocidad: 0,
     },
     {
       id: 14,
@@ -120,7 +120,7 @@ export const planetasDB = [
       modelo: "assets/modelos_3d/nebulosa.glb",
       audio: "assets/audio/nebulosa.mp3",
       escala: "0.5 0.5 0.5",
-      velocidad: 2000
+      velocidad: 0,
     },
     {
       id: 15,
@@ -129,8 +129,8 @@ export const planetasDB = [
       type: "3dmodel",
       modelo: "assets/modelos_3d/planetas_orbitando.glb",
       audio: "assets/audio/planetas_orbitando.mp3",
-      escala: "0.3 0.3 0.3",
-      velocidad: 5000
+      escala: "0.05 0.05 0.05",
+      velocidad: 0,
     },
     {
       id: 16,
@@ -139,8 +139,8 @@ export const planetasDB = [
       type: "3dmodel",
       modelo: "assets/modelos_3d/saturno_3d.glb",
       audio: "assets/audio/saturno_3d.mp3",
-      escala: "0.5 0.5 0.5",
-      velocidad: 4500
+      escala: "0.1 0.1 0.1",
+      velocidad: 4500,
     },
     {
       id: 17,
@@ -150,7 +150,7 @@ export const planetasDB = [
       modelo: "assets/modelos_3d/sistema_solar3d.glb",
       audio: "assets/audio/sistema_solar3d.mp3",
       escala: "0.1 0.1 0.1",
-      velocidad: 4000
+      velocidad: 0,
     },
     {
       id: 18,
@@ -159,7 +159,7 @@ export const planetasDB = [
       type: "3dmodel",
       modelo: "assets/modelos_3d/solar_system_model_orrery.glb",
       audio: "assets/audio/solar_system_model_orrery.mp3",
-      escala: "0.2 0.2 0.2",
-      velocidad: 3000
+      escala: "0.1 0.1 0.1",
+      velocidad: 0,
     },
   ];

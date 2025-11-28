@@ -89,7 +89,7 @@ function iniciarExperiencia() {
         entity = document.createElement('a-entity');
         entity.setAttribute('gltf-model', data.modelo);
         // La escala es vital en modelos externos
-        entity.setAttribute('scale', data.escala || '1 1 1'); 
+        entity.setAttribute('scale', data.escala ); 
         // Ajustamos posición para que flote sobre el marcador
         entity.setAttribute('position', '0 0.5 0');
     } else {
@@ -106,7 +106,7 @@ function iniciarExperiencia() {
     }
 
     // Animación común para ambos (Rotación)
-    entity.setAttribute('animation', `property: rotation; to: 0 360 0; loop: true; dur: ${data.velocidad || 10000}; easing: linear`);
+    entity.setAttribute('animation', `property: rotation; to: 0 360 0; loop: true; dur: ${data.velocidad }; easing: linear`);
 
     // Agregamos la entidad (sea esfera o modelo) al marcador
     marker.appendChild(entity);
