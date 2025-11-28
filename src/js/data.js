@@ -102,8 +102,7 @@ export const planetasDB = [
     escala: "0.5 0.5 0.5", // IMPORTANTE: Los modelos suelen venir muy grandes o chicos
     velocidad: 4500
   },
-  [
-    {
+  {
       id: 13,
       nombre: "eclipse_solar_3d",
       pattern: "assets/marcadores/pattern_eclipse_solar.patt", // Corregido según tu imagen
@@ -163,5 +162,4 @@ export const planetasDB = [
       escala: "0.2 0.2 0.2",
       velocidad: 3000
     },
-  ]
-];
+  ];
