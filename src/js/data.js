@@ -139,7 +139,7 @@ export const planetasDB = [
       type: "3dmodel",
       modelo: "assets/modelos_3d/saturno_3d.glb",
       audio: "assets/audio/saturno_3d.mp3",
-      escala: "0.1 0.1 0.1",
+      escala: '0.1 0.1 0.1',
       velocidad: 4500,
     },
     {

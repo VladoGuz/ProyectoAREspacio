@@ -69,7 +69,7 @@ function iniciarExperiencia() {
 
   planetasDB.forEach(data => {
     const marker = document.createElement('a-marker');
-    
+    console.log("nombre"+data.nombre);
     // Configuración del marcador
     if (data.pattern === 'hiro') {
       marker.setAttribute('preset', 'hiro');
@@ -83,15 +83,17 @@ function iniciarExperiencia() {
 
     // --- AQUÍ ESTÁ EL CAMBIO PARA SOPORTAR EL MODELO GLB ---
     let entity;
-
+    
     if (data.type === '3dmodel') {
+      console.log("modelo"+data.modelo + "  escala" + data.escala );
         // CASO 1: Es un Modelo 3D (Saturno)
         entity = document.createElement('a-entity');
         entity.setAttribute('gltf-model', data.modelo);
         // La escala es vital en modelos externos
         entity.setAttribute('scale', data.escala ); 
         // Ajustamos posición para que flote sobre el marcador
-        entity.setAttribute('position', '0 0.5 0');
+        entity.setAttribute('position' , '0 0 0');
+        
     } else {
         // CASO 2: Es una esfera normal (Tierra, Marte, etc.)
         entity = document.createElement('a-sphere');
