@@ -6,7 +6,7 @@ export const planetasDB = [
     pattern: "assets/marcadores/pattern_sol.patt",
     textura: "assets/planetas/sol.jpg",
     audio: "assets/audio/sol_sonido.mp3",
-    tamano: 1.2,
+    tamano: 1.8,
     velocidad: 35000, 
   },
   // --- PLANETAS INTERIORES ---
@@ -16,7 +16,7 @@ export const planetasDB = [
     pattern: "assets/marcadores/pattern_mercurio.patt",
     textura: "assets/planetas/2k_mercury.jpg",
     audio: "assets/audio/mercurio_sonido.mp3",
-    tamano: 0.3,
+    tamano: 0.6,
     velocidad: 15000,
   },
   {
@@ -25,7 +25,7 @@ export const planetasDB = [
     pattern: "assets/marcadores/pattern_venus.patt",
     textura: "assets/planetas/2k_venus_surface.jpg",
     audio: "assets/audio/venus_sonido.mp3",
-    tamano: 0.45,
+    tamano: 0.9,
     velocidad: 25000,
   },
   {
@@ -34,7 +34,7 @@ export const planetasDB = [
     pattern: "assets/marcadores/pattern_tierra.patt",
     textura: "assets/planetas/2k_earth_daymap.jpg",
     audio: "assets/audio/tierra_sonido.mp3",
-    tamano: 0.5,
+    tamano: 1,
     velocidad: 10000,
   },
   {
@@ -43,7 +43,7 @@ export const planetasDB = [
     pattern: "assets/marcadores/pattern_marte.patt",
     textura: "assets/planetas/2k_mars.jpg",
     audio: "assets/audio/marte_sonido.mp3",
-    tamano: 0.4,
+    tamano: 0.8,
     velocidad: 10000,
   },
   // --- GIGANTES GASEOSOS ---
@@ -53,7 +53,7 @@ export const planetasDB = [
     pattern: "assets/marcadores/pattern_jupiter.patt",
     textura: "assets/planetas/2k_jupiter.jpg",
     audio: "assets/audio/jupiter_sonido.mp3",
-    tamano: 0.5,
+    tamano: 1,
     velocidad: 4000,
   },
   {
@@ -62,7 +62,7 @@ export const planetasDB = [
     pattern: "assets/marcadores/pattern_saturno.patt",
     textura: "assets/planetas/2k_saturn.jpg",
     audio: "assets/audio/saturno_sonido.mp3",
-    tamano: 0.9,
+    tamano: 1.8,
     velocidad: 4500,
   },
   {
@@ -71,7 +71,7 @@ export const planetasDB = [
     pattern: "assets/marcadores/pattern_urano.patt",
     textura: "assets/planetas/urano.jpg",
     audio: "assets/audio/urano_sonido.mp3",
-    tamano: 0.7,
+    tamano: 1.4,
     velocidad: 6000,
   },
   {
@@ -80,7 +80,7 @@ export const planetasDB = [
     pattern: "assets/marcadores/pattern_neptuno.patt",
     textura: "assets/planetas/2k_neptune.jpg",
     audio: "assets/audio/neptuno_sonido.mp3",
-    tamano: 0.7,
+    tamano: 1.4,
     velocidad: 6000,
   },
   // --- SATÉLITE ---
@@ -90,7 +90,7 @@ export const planetasDB = [
     pattern: "assets/marcadores/pattern_luna.patt",
     textura: "assets/planetas/luna.jpg",
     audio: "assets/audio/luna_sonido.mp3",
-    tamano: 0.25,
+    tamano: 0.6,
     velocidad: 3800,
   },
   // --- MODELOS 3D (GLB) ---
@@ -131,8 +131,8 @@ export const planetasDB = [
     type: "3dmodel",
     modelo: "assets/modelos_3d/planetas_orbitando.glb",
     audio: "assets/audio/planetas_orbitando.mp3",
-    escala: "0.05 0.05 0.05",
-    velocidad: 4500,
+    escala: "0.01 0.01 0.01",
+    velocidad: 0,
   },
   {
     id: 16,
@@ -142,7 +142,7 @@ export const planetasDB = [
     modelo: "assets/modelos_3d/saturno_3d.glb",
     audio: "assets/audio/saturno_sonido.mp3",
     // AQUÍ ESTÁ EL CAMBIO: Lo reduje de 0.1 a 0.01
-    escala: "0.009 0.009 0.009", 
+    escala: "0.01 0.01 0.01", 
     velocidad: 4500,
   },
   {
@@ -154,7 +154,7 @@ export const planetasDB = [
     audio: "assets/audio/sistema_solar3d.mp3",
     // Si este también te sale gigante, cámbialo a "0.01 0.01 0.01"
     escala: "0.009 0.009 0.009", 
-    velocidad: 0,
+    velocidad: 100000,
   },
 
 ];
