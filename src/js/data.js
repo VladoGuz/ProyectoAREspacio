@@ -153,7 +153,7 @@ export const planetasDB = [
     modelo: "assets/modelos_3d/sistema_solar3d.glb",
     audio: "assets/audio/sistema_solar3d.mp3",
     // Si este también te sale gigante, cámbialo a "0.01 0.01 0.01"
-    escala: "0.1 0.1 0.1", 
+    escala: "0.009 0.009 0.009", 
     velocidad: 0,
   },
 
