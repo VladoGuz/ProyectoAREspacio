@@ -120,7 +120,7 @@ export const planetasDB = [
     pattern: "assets/marcadores/pattern_nebulosa.patt",
     type: "3dmodel",
     modelo: "assets/modelos_3d/nebulosa.glb",
-    audio: "assets/audio/nebulosa.mp3",
+    audio: "assets/audio/nebulosa_sonido.mp3",
     escala: "0.5 0.5 0.5",
     velocidad: 0,
   },

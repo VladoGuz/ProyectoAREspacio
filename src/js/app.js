@@ -1,65 +1,87 @@
-// Al agregar ?v=2, el navegador se ve obligado a descargar el archivo nuevo
-import { planetasDB } from "./data.js?v=2";
+import { planetasDB } from "./data.js";
 
-// --- CONFIGURACIÓN DE COMPONENTES DE AFRAME ---
-  console.log("DATOS CARGADOS:", planetasDB);
-// Componente para manejar el audio al detectar/perder marcadores
+// Variable global para controlar que solo suene un audio a la vez
+let audioActual = null;
+
+// --- 1. COMPONENTE DE MANEJO DE AUDIO (Sound Handler) ---
 AFRAME.registerComponent("sound-handler", {
   init: function () {
-    // Cuando el marcador es DETECTADO
+    // Cuando la cámara encuentra el marcador
     this.el.addEventListener("markerFound", () => {
       const soundEntity = this.el.querySelector("[sound]");
+
       if (soundEntity) {
-        console.log("Marcador encontrado, reproduciendo audio...");
-        soundEntity.components.sound.stopSound(); // Reinicia si ya estaba sonando
-        soundEntity.components.sound.playSound();
+        console.log("🟢 Marcador detectado. Intentando reproducir audio...");
+
+        // Si ya hay un audio sonando y no es este, lo callamos
+        if (audioActual && audioActual !== soundEntity) {
+          audioActual.components.sound.stopSound();
+        }
+
+        // Guardamos este como el actual
+        audioActual = soundEntity;
+
+        // Reproducimos (el .catch evita errores si el navegador bloquea)
+        try {
+          soundEntity.components.sound.stopSound(); // Reinicia el audio
+          soundEntity.components.sound.playSound();
+        } catch (error) {
+          console.error("⚠️ Error reproduciendo audio:", error);
+        }
       }
     });
 
-    // Cuando el marcador se PIERDE (Opcional pero recomendado)
+    // Cuando se pierde el marcador (Opcional: detiene el audio)
     this.el.addEventListener("markerLost", () => {
       const soundEntity = this.el.querySelector("[sound]");
       if (soundEntity) {
-        console.log("Marcador perdido, pausando audio.");
+        console.log("🔴 Marcador perdido. Pausando audio.");
         soundEntity.components.sound.stopSound();
       }
     });
   },
 });
 
-// --- LÓGICA PRINCIPAL ---
-
+// --- 2. LOGICA DE INICIO (DOM) ---
 document.addEventListener("DOMContentLoaded", () => {
   const startBtn = document.getElementById("btn-start");
-  
-  // Si existe el botón, esperamos el click para iniciar (necesario para el audio)
+
   if (startBtn) {
-    startBtn.addEventListener("click", iniciarExperiencia);
+    startBtn.addEventListener("click", () => {
+      // A. Ocultar pantalla de bienvenida
+      document.getElementById("overlay").style.display = "none";
+
+      // B. DESBLOQUEAR AUDIO (Vital para Chrome/Android)
+      const scene = document.querySelector("a-scene");
+      
+      // Intentamos despertar el AudioContext del navegador
+      if (scene.audioListener && scene.audioListener.context) {
+        const context = scene.audioListener.context;
+        if (context.state === "suspended") {
+          context.resume().then(() => {
+            console.log("🔊 AudioContext DESBLOQUEADO por el clic del usuario.");
+          });
+        }
+      }
+
+      // C. Cargar los planetas
+      iniciarExperiencia();
+    });
   } else {
-    // Si no tienes botón de inicio, intenta cargar directo (puede fallar el audio en Chrome)
-    console.warn("No se encontró botón de inicio. El audio podría bloquearse.");
+    // Si no hay botón, intentamos cargar directo (puede fallar audio)
+    console.warn("⚠️ No se encontró botón de inicio. El audio podría fallar.");
     iniciarExperiencia();
   }
 });
 
+// --- 3. GENERADOR DE ESCENA ---
 function iniciarExperiencia() {
-  // 1. Ocultar el overlay de bienvenida si existe
-  const overlay = document.getElementById("overlay");
-  if (overlay) overlay.style.display = "none";
-
-  // 2. Desbloquear el AudioContext (Vital para navegadores modernos)
   const scene = document.querySelector("a-scene");
-  if (scene.audioListener && scene.audioListener.context.state === "suspended") {
-    scene.audioListener.context.resume().then(() => {
-      console.log("AudioContext activado correctamente.");
-    });
-  }
 
-  // 3. Generar los planetas desde la base de datos
   planetasDB.forEach((data) => {
     const marker = document.createElement("a-marker");
 
-    // Configuración del tipo de marcador (Hiro o Pattern)
+    // Configuración del marcador (Hiro o Pattern personalizado)
     if (data.pattern.includes("hiro")) {
       marker.setAttribute("preset", "hiro");
     } else {
@@ -67,66 +89,72 @@ function iniciarExperiencia() {
       marker.setAttribute("url", data.pattern);
     }
 
-    // Añadimos el componente que controla el sonido
+    // Añadimos el componente de control de audio y eventos
     marker.setAttribute("sound-handler", "");
-    marker.setAttribute("emitevents", "true"); // Necesario para detectar eventos en AR.js
+    marker.setAttribute("emitevents", "true");
 
-    // --- CREACIÓN DEL OBJETO VISUAL (Esfera o Modelo 3D) ---
+    // --- LOGICA VISUAL: ¿Es Modelo 3D o Esfera? ---
     let entity;
 
     if (data.type === "3dmodel") {
-      // CASO A: Es un Modelo GLB (Saturno 3D, Blackhole, etc.)
+      // CASO A: Modelo GLB (Saturno 3D, Nave, etc.)
       entity = document.createElement("a-entity");
       entity.setAttribute("gltf-model", data.modelo);
       
-      // Aplicamos la ESCALA desde data.js
-      entity.setAttribute("scale", data.escala); 
+      // Aplicamos la escala que definiste en data.js (ej: "0.005 0.005 0.005")
+      entity.setAttribute("scale", data.escala);
       
-      // Corrección de rotación inicial (a veces los modelos vienen acostados)
-      entity.setAttribute("rotation", "0 0 0"); 
-      
+      // Corrección de rotación base
+      entity.setAttribute("rotation", "0 0 0");
+
     } else {
-      // CASO B: Es una Esfera (Sol, Tierra, Júpiter normal)
+      // CASO B: Esfera básica (Sol, Tierra, Marte)
       entity = document.createElement("a-sphere");
-      
-      // Aplicamos el TAMAÑO (radio) desde data.js
       entity.setAttribute("radius", data.tamano);
       
-      // Material / Textura
+      // Posición para que flote sobre el marcador
+      entity.setAttribute("position", `0 ${data.tamano} 0`);
+
+      // Textura
       if (data.nombre === "Sol") {
-        // El sol brilla (shader: flat evita sombras)
         entity.setAttribute("material", `shader: flat; src: ${data.textura}`);
       } else {
         entity.setAttribute("src", data.textura);
       }
-      
-      // Posición para que no atraviese el marcador (radio hacia arriba)
-      entity.setAttribute("position", `0 ${data.tamano} 0`);
     }
 
     // --- ANIMACIÓN DE ROTACIÓN ---
-    // Solo añadimos animación si la velocidad es mayor a 0
+    // Solo rotamos si la velocidad es mayor a 0
     if (data.velocidad > 0) {
       entity.setAttribute("animation", {
         property: "rotation",
         to: "0 360 0",
         loop: true,
-        dur: data.velocidad, // Tiempo en ms (menos es más rápido)
+        dur: data.velocidad,
         easing: "linear"
       });
     }
 
     marker.appendChild(entity);
 
-    // --- CONFIGURACIÓN DE AUDIO ---
+    // --- CONFIGURACIÓN DE AUDIO OPTIMIZADA ---
     if (data.audio) {
       const sound = document.createElement("a-entity");
-      // 'poolSize: 1' ayuda a la gestión de memoria en móviles
-      sound.setAttribute("sound", `src: url(${data.audio}); autoplay: false; volume: 4; loop: false;`);
+      
+      // poolSize: 5 -> Permite mejor manejo de memoria en móviles
+      // volume: 5 -> Sube el volumen por defecto
+      sound.setAttribute("sound", `
+        src: url(${data.audio}); 
+        autoplay: false; 
+        volume: 5; 
+        loop: false;
+        poolSize: 5;
+      `);
+      
       marker.appendChild(sound);
     }
 
-    // Añadimos el marcador completo a la escena
+    // Añadir todo a la escena
     scene.appendChild(marker);
   });
 }
