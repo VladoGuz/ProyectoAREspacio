@@ -140,7 +140,7 @@ export const planetasDB = [
     pattern: "assets/marcadores/pattern_saturno3d.patt",
     type: "3dmodel",
     modelo: "assets/modelos_3d/saturno_3d.glb",
-    audio: "assets/audio/saturno_3d.mp3",
+    audio: "assets/audio/saturno_sonido.mp3",
     // AQUÍ ESTÁ EL CAMBIO: Lo reduje de 0.1 a 0.01
     escala: "0.009 0.009 0.009", 
     velocidad: 4500,
