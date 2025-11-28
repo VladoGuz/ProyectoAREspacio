@@ -142,7 +142,7 @@ export const planetasDB = [
     modelo: "assets/modelos_3d/saturno_3d.glb",
     audio: "assets/audio/saturno_3d.mp3",
     // AQUÍ ESTÁ EL CAMBIO: Lo reduje de 0.1 a 0.01
-    escala: "0.0005 0.0005 0.0005", 
+    escala: "0.009 0.009 0.009", 
     velocidad: 4500,
   },
   {
@@ -156,15 +156,5 @@ export const planetasDB = [
     escala: "0.1 0.1 0.1", 
     velocidad: 0,
   },
-  {
-    id: 18,
-    nombre: "solar_system_model_orrery",
-    pattern: "assets/marcadores/pattern_sistema_solar2.patt",
-    type: "3dmodel",
-    modelo: "assets/modelos_3d/solar_system_model_orrery.glb",
-    audio: "assets/audio/solar_system_model_orrery.mp3",
-    // Lo mismo aquí, ajusta si es necesario
-    escala: "0.1 0.1 0.1", 
-    velocidad: 0,
-  },
+
 ];

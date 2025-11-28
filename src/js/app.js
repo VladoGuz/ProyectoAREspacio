@@ -146,7 +146,7 @@ function iniciarExperiencia() {
       sound.setAttribute("sound", `
         src: url(${data.audio}); 
         autoplay: false; 
-        volume: 5; 
+        volume: 10; 
         loop: false;
         poolSize: 5;
       `);
